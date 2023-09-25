@@ -441,8 +441,7 @@ class Exporter
             $headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
             $header = substr($response, 0, $headerSize);
             $body = substr($response, $headerSize);
-            echo ("Request failed: $header $body");
-            exit();
+            throw new \Exception("Request failed: " . $header . $body, $cInfo['http_code']);
         }
         curl_close($ch);
         ob_end_clean();
